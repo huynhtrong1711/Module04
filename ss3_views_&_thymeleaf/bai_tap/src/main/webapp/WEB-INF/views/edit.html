@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<center>
+<body>
+<h3>Edit Product</h3>
+<p>
+    <a th:href="@{/product}">
+        Back to product list
+    </a>
+</p>
+<div id="form">
+    <form action="#" th:action="@{/product/update}" th:object="${products}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <table border="2" style="width: 30%; height: 100px">
+            <tr>
+                <td><label>Name: </label></td>
+                <td><input type="text" th:field="*{nameProduct}" style="width: 350px; height: 40px"/></td>
+            </tr>
+            <tr>
+                <td><label>Price: </label></td>
+                <td><input type="email" th:field="*{price}" style="width: 350px; height: 40px"/></td>
+            </tr>
+            <tr>
+                <td><label>Amount: </label></td>
+                <td><input type="text" th:field="*{amount}" style="width: 350px; height: 40px"/></td>
+            </tr>
+            <tr>
+                <td><label>Description :</label></td>
+                <td><input type="text" th:field="*{description}" style="width: 350px; height: 40px"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Edit"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</center>
+</html>
