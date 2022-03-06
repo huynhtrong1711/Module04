@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -31,9 +32,10 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public String save(Customer customer) {
+    public String save(Customer customer, RedirectAttributes redirectAttributes) {
         customer.setId((int) (Math.random() * 1000));
         iCustomerService.save(customer);
+        redirectAttributes.addFlashAttribute("message", "Bạn đã thêm mới khách hàng: " + customer.getName() + " thành công");
         return "redirect:/customer";
     }
 
@@ -56,8 +58,9 @@ public class CustomerController {
     }
 
     @PostMapping("/delete")
-    public String remove(Customer customer) {
+    public String remove(Customer customer, RedirectAttributes redirectAttributes) {
         iCustomerService.remove(customer.getId());
+        redirectAttributes.addFlashAttribute("message","Bạn đã xóa khách hàng: " + customer.getName() + " thành công" );
         return "redirect:/customer";
     }
 

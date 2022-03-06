@@ -15,10 +15,9 @@ import java.util.Map;
 @Service
 public class ProductServiceImpl implements IProductService{
 
-    private static final Map<Integer, Product> products;
+    private static Map<Integer, Product> products = new HashMap<>();
 
     static {
-        products = new HashMap<>();
         products.put(1, new Product(1, "Iphone 11", 15000.0, 10, "vip"));
         products.put(2, new Product(2, "Iphone 11 Pro", 17000.0, 10, "vipPro"));
         products.put(3, new Product(3, "Iphone 12 Pro", 23000.0, 10, "So Wonderful"));
@@ -51,5 +50,16 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public void remove(int id) {
         products.remove(id);
+    }
+
+    @Override
+    public List<Product> searchByName(String name) {
+        List<Product> productsList = new ArrayList<>();
+        for (Map.Entry<Integer,Product> entry : products.entrySet()) {
+            if(entry.getValue().getNameProduct().toLowerCase().contains(name.toLowerCase())){
+                productsList.add(entry.getValue());
+            }
+        }
+        return productsList;
     }
 }

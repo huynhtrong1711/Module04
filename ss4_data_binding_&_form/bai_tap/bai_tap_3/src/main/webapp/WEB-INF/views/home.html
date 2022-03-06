@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div>
+    <div>
+        <h3 style="text-align: center; text-decoration: none solid rgb(0,0,0); line-height: 30px; text-transform: uppercase; word-spacing: 0px">Tờ khai y tế</h3>
+        <h4 style="text-align: center">TÀI LIỆU QUAN TRỌNG, THÔNG TIN CỦA ANH/CHỊ SẼ GIÚP CƠ QUAN Y TẾ LIÊN LẠC KHI CẦN THIẾT ĐỂ PHÒNG CHỐNG</h4>
+        <h5 style="text-align: center; color: red">Khuyến cáo: Khai báo thông tin sai là vi phạm pháp luật Việt Nam và có thể xử lý hình sự</h5>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <form action="/register" th:object="${from}" method="post">
+            <label>Họ tên(ghi chữ IN HOA)(*)</label>
+            <input type="text" th:field="*{fullName}" required><br>
+            <label>Năm sinh(*)</label>
+            <input type="number" min="1900" th:field="*{birthday}" required>
+            <label >giới tính(*)</label>
+            <select th:field="*{gender}" required>
+                <option value="true">nam</option>
+                <option value="false">nữ</option>
+            </select><br>
+            <label >Quốc tịch(*)</label>
+            <input type="text" th:field="*{national}" required><br>
+            <label>Số hộ chiếu,CMND(*)</label>
+            <input type="text" required th:field="*{idCard}"><br>
+            <label>Thông tin đi lại(*)</label>
+            <input required type="radio" th:each="travel:${travel}" th:value="${travel}" th:text="${travel}" th:field="*{travelInformation}"><br>
+            <label >Số hiệu phương tiện(*)</label>
+            <input required type="text" th:field="*{travelNum}"><br>
+            <label>Số ghế</label>
+            <input required type="text" th:field="*{numberOfSeat}"><br>
+            <label>Ngày khởi hành(*)</label>
+            <input required type="date" th:field="*{startDay}"><br>
+            <label>Ngày kết thúc</label>
+            <input required type="date" th:field="*{endDay}"><br>
+            <label>Trong vòng 14 ngày qua, Anh chị có đi đến tỉnh thnhf nào không?(*)</label>
+            <input required type="text" th:field="*{twoWeeksInformation}"><br>
+            <br>
+            <p >Địa chỉ liên lạc</p>
+            <label>Tỉnh/Thành</label>
+            <input required type="text" th:field="*{province}"><br>
+            <label> Quận/huyện</label>
+            <input required type="text" th:field="*{precinct}"><br>
+            <label>Phường/Xã</label>
+            <input required type="text" th:field="*{district}"><br>
+            <label>Địa chỉ nơi ở</label>
+            <input required type="text" th:field="*{address}"><br>
+            <label >Điện thoại</label>
+            <input required type="text" th:field="*{phone}"><br>
+            <label >email</label>
+            <input required type="email" th:field="*{email}">
+
+            <table>
+                <tr>
+                    <th>Triệu chứng</th>
+                    <th>Có</th>
+                    <th>Không</th>
+                </tr>
+                <tr>
+                    <td>Sốt</td>
+                    <td>
+                        <input type="radio" th:field="*{temperature}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{temperature}" value="false">
+                    </td>
+                </tr>
+                <tr>
+                    <td>ho</td>
+                    <td>
+                        <input type="radio" th:field="*{ho}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{ho}" value="false">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>khó thở</td>
+                    <td>
+                        <input type="radio" th:field="*{khoTho}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{khoTho}" value="false">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Đau họng</td>
+                    <td>
+                        <input type="radio" th:field="*{dauHong}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{dauHong}" value="false">
+                    </td>
+                </tr>
+                <tr>
+                    <td>buồn nôn </td>
+                    <td>
+                        <input type="radio" th:field="*{buonNon}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{buonNon}" value="false">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tiêu chảy</td>
+                    <td>
+                        <input type="radio" th:field="*{tieuChay}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{tieuChay}" value="false">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>xuất huyết ngoài da</td>
+                    <td>
+                        <input type="radio" th:field="*{xuatHuyetNgoaiDa}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{xuatHuyetNgoaiDa}" value="false">
+                    </td>
+                </tr>
+                <tr>
+                    <td>nổi ban ngoài da</td>
+                    <td>
+                        <input type="radio" th:field="*{noiBanNgoaiDa}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{noiBanNgoaiDa}" value="false">
+                    </td>
+                </tr>
+
+            </table>
+            <br>
+            <p>Lịch sử phơi nhiễm: trong vòng 14 ngày qua Anh chị có:</p>
+            <table>
+                <tr>
+                    <td></td>
+                    <td>Có</td>
+                    <td>không</td>
+                </tr>
+                <tr>
+                    <td>
+                        Đến trang trai chăn nuôi/cở sở giết mổ động vật không
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{tiepXucDongVat}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{tiepXucDongVat}" value="false">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tiếp xúc gần (<2m) với người bênh?
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{tiepXucF0}" value="true">
+                    </td>
+                    <td>
+                        <input type="radio" th:field="*{tiepXucF0}" value="false">
+                    </td>
+                </tr>
+
+            </table>
+
+            <br>
+            <p>Dữ liệu bạn cung cấp hoàn toàn bảo mật và chỉ phục vụ cho việc phòng chống dịch, thuộc quản lý của ban chỉ đạo quốc gia về phòng chóng dịch Covid-19</p>
+            <p>Khi bạn nhấn gửi là bạn đã hiểu và đồng ý</p>
+            <input type="submit">
+        </form>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.service.ITranslateService;
 import com.codegym.service.TranslateServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +11,7 @@ import java.util.Map;
 
 @Controller
 public class Dictionary {
-    private TranslateServiceImpl translates = new TranslateServiceImpl();
-    Map<String, String> translateMap = translates.dictionaryMap();
+    private ITranslateService translates = new TranslateServiceImpl();
 
     @GetMapping("/")
     public String home(){
@@ -20,13 +20,8 @@ public class Dictionary {
 
     @GetMapping("/translate")
     public String translate (@RequestParam String english, Model model) {
-        for (Map.Entry<String, String> entry : translateMap.entrySet()) {
-            if (entry.getKey().toLowerCase().equals(english.toLowerCase())){
-                model.addAttribute("vietnamese", entry.getValue());
-            }else {
-                model.addAttribute("massage", "Không có từ cần tìm!");
-            }
-        }
+        String search = translates.check(english);
+        model.addAttribute("search", search);
         return "/home";
     }
 }

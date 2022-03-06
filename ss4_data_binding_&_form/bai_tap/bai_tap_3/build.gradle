@@ -18,6 +18,8 @@ dependencies {
     implementation group: 'org.springframework', name: 'spring-beans', version: '4.3.17.RELEASE'
     implementation group: 'org.springframework', name: 'spring-web', version: '4.3.17.RELEASE'
     implementation group: 'org.springframework', name: 'spring-webmvc', version: '4.3.17.RELEASE'
+    implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
+    implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.5.2'
 
     testImplementation group: 'junit', name: 'junit', version: '4.11'
     testImplementation group: 'junit', name: 'junit', version: '4.12'

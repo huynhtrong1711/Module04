@@ -16,6 +16,6 @@
     <input type="text" name="english" placeholder="english">
     <input type="submit" value="translate">
 </form>
-<h1>${vietnamese != null ? vietnamese : massage}</h1>
+<h1>Kết quả: ${search}</h1>
 </body>
 </html>

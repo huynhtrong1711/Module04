@@ -13,11 +13,12 @@
         Add new product
     </a>
 </p>
-<div class="notify">
-    <div th:if="${success}">
-        <span th:text="${success}"></span>
-    </div>
-</div>
+<h3 th:text="${message}"></h3>
+<!--<h3 th:text="${delete}"></h3>-->
+<form action="/product/search" method="post">
+    <input type="text" name = "name" placeholder="input name" required>
+    <input type="submit" value="Search">
+</form>
 <table class="table" border="2" style="background-color: azure; width: 70%; height: 300px" >
     <thead>
     <tr style="color: crimson;">

@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -36,9 +34,10 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String save(Product product) {
+    public String save(Product product, RedirectAttributes redirectAttributes) {
         product.setId((int) (Math.random() * 1000));
         productService.save(product);
+        redirectAttributes.addFlashAttribute("message", "Thêm mới sản phẩm: " + product.getNameProduct() + " thành công");
         return "redirect:/product";
     }
 
@@ -52,5 +51,34 @@ public class ProductController {
     public String update(Product product){
         productService.update(product.getId(), product);
         return "redirect:/product";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable int id, Model model) {
+        model.addAttribute("product", productService.findById(id));
+        return "/delete";
+    }
+
+    @PostMapping("/delete")
+    public String delete(Product product, RedirectAttributes redirectAttributes) {
+        productService.remove(product.getId());
+        redirectAttributes.addFlashAttribute("message", "Bạn đã xóa sản phẩm " + product.getNameProduct() + " thành công");
+        return "redirect:/product";
+    }
+
+    @RequestMapping("/search")
+    public String search(@RequestParam String name,Model model){
+        List<Product> products = productService.searchByName(name);
+        if(products.size()==0){
+            model.addAttribute("message","not exits");
+        }
+        model.addAttribute("products",products);
+        return ("/index");
+    }
+
+    @GetMapping("/{id}/view")
+    public String view(@PathVariable int id, Model model) {
+        model.addAttribute("product", productService.findById(id));
+        return "/view";
     }
 }

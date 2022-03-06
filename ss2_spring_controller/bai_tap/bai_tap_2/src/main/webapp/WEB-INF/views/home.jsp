@@ -15,11 +15,11 @@
 <form action="/home" method="post" style="text-align: center">
     <label>Number One<input type="text" name="numberOne" placeholder="numberOne"></label>
     <label>Number Two<input type="text" name="numberTwo" placeholder="numberTwo"></label><br>
-    <label><button type="submit" name="button" value="Addition" style="color: blue">Addition +</button></label>
-    <label><button type="submit" name="button" value="Subtraction" style="color: blue">Subtraction -</button></label>
-    <label><button type="submit" name="button" value="Multiplication" style="color: blue">Multiplication *</button></label>
-    <label><button type="submit" name="button" value="Division" style="color: blue">Division /</button></label><br>
-    <label>Result: ${result} ${message}</label>
+    <label><button type="submit" name="button" value="Addition (+)" style="color: blue">Addition +</button></label>
+    <label><button type="submit" name="button" value="Subtraction (-)" style="color: blue">Subtraction -</button></label>
+    <label><button type="submit" name="button" value="Multiplication (*)" style="color: blue">Multiplication *</button></label>
+    <label><button type="submit" name="button" value="Division (/)" style="color: blue">Division /</button></label><br>
+    <label>Result: ${result}</label>
 </form>
 
 </body>
