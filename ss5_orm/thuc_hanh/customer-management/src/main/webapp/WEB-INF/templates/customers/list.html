@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
   <title>Customer List</title>
   <style>
     table {
@@ -26,13 +25,13 @@ There are <span th:text="${customers.size()}"></span> customer(s).
   </tr>
   </thead>
   <tbody>
-  <tr th:each="c : ${customers}">
-    <td th:text="${c.id}"></td>
+  <tr th:each="customer : ${customers}">
+    <td th:text="${customer.id}"></td>
     <td>
-      <a th:href="@{/customers/{id}(id=${c.id})}" th:text="${c.name}"></a>
+      <a th:href="@{/customers/{id}(id=${customer.id})}" th:text="${customer.name}"></a>
     </td>
-    <td th:text="${c.email}"></td>
-    <td th:text="${c.address}"></td>
+    <td th:text="${customer.email}"></td>
+    <td th:text="${customer.address}"></td>
   </tr>
   </tbody>
 </table>
