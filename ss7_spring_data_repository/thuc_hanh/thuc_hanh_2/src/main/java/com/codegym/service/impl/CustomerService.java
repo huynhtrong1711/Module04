@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -41,5 +42,10 @@ public class CustomerService implements ICustomerService {
     @Override
     public void remove(int id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Page<Customer> searchByName(String name, Pageable pageable) {
+        return repository.searchByName(name, pageable);
     }
 }

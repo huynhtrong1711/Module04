@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3 style="text-align: center">Blog</h3>
+<p>
+    <a th:href="@{/blog/create}">
+        Add new Blog
+    </a>
+</p><br>
+<p>
+    <a th:href="@{/category/home}">
+        Đi tới trang quản lý category
+    </a>
+</p>
+<a th:text="${message}"></a>
+<table id = "blog">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name Blog</th>
+        <th>Blog Content</th>
+        <th>Date Create</th>
+        <th>Category</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blogs : ${blogList}">
+        <td th:text="${blogs.id}"></td>
+        <td ><a th:href="@{/blog/{id}/view(id=${blogs.getId()})}" th:text="${blogs.nameBlog}"></a></td>
+        <td th:text="${blogs.content}"></td>
+        <td th:text="${blogs.dayCreate}"></td>
+        <td th:if="${blogs.category}" th:text="${blogs.category.nameCategory}"></td>
+        <td th:unless="${blogs.category}"></td>
+        <td><a th:href="@{/blog/{id}/edit(id=${blogs.getId()})}">edit</a></td>
+        <td><a th:href="@{/blog/{id}/delete(id=${blogs.getId()})}">delete</a></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{'/blog'(page = ${blogList.number - 1})}"
+   th:if="${blogList.hasPrevious()}">Previous</a>
+<span th:text="${blogList.number + 1}"></span>
+/ <span th:text="${blogList.totalPages}"></span>
+<a th:href="@{'/blog'(page = ${blogList.number + 1})}"
+   th:if="${blogList.hasNext()}">Next</a>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

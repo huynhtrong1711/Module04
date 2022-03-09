@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("customers")
 public class CustomerController {
@@ -78,6 +80,16 @@ public class CustomerController {
         customerService.remove(customer.getId());
         redirectAttributes.addFlashAttribute("message", "Xóa thành công!");
         return "redirect:/customers/home";
+    }
+
+    @GetMapping("/search")
+    public ModelAndView searchByName(
+            @RequestParam("result") String keyword, Pageable pageable) {
+        Page<Customer> customer = customerService.searchByName(keyword, pageable);
+        ModelAndView modelAndView = new ModelAndView("customer/home");
+        modelAndView.addObject("customer", customer);
+        modelAndView.addObject("province", provinceService.findAll());
+        return modelAndView;
     }
 
 }

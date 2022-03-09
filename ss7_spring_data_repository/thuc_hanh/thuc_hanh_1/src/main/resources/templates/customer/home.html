@@ -5,13 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/create">Create new customer</a>
+<a href="/customers/create">Tạo mới một khách hàng</a><br>
+<a href="/provinces/list">Đi đến trang quản lý tỉnh thành</a>
+
 <p th:text="${message}"></p>
 <h1>Customers</h1>
 <table border="1">
     <tr>
         <th>First name</th>
         <th>Last name</th>
+        <th>Province</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -19,17 +22,19 @@
         <tr>
             <td th:text="${customers.firstName}"></td>
             <td th:text="${customers.lastName}"></td>
-            <td><a th:href="@{/edit/__${customers.id}__ }">Edit</a></td>
-            <td><a th:href="@{/delete/__${customers.id}__ }">Delete</a></td>
+            <td th:if="${customers.province}" th:text="${customers.province.name}"></td>
+            <td th:unless="${customers.province}"></td>
+            <td><a th:href="@{/customers/edit/__${customers.id}__ }">Edit</a></td>
+            <td><a th:href="@{/customers/delete/__${customers.id}__ }">Delete</a></td>
         </tr>
     </th:block>
 </table>
 <div>
-    <a th:href="@{'/customer/home'(page = ${customer.number - 1})}"
+    <a th:href="@{'/customers/home'(page = ${customer.number - 1})}"
        th:if="${customer.hasPrevious()}">Previous</a>
     <span th:text="${customer.number + 1}"></span>
     / <span th:text="${customer.totalPages}"></span>
-    <a th:href="@{'/customer/home'(page = ${customer.number + 1})}"
+    <a th:href="@{'/customers/home'(page = ${customer.number + 1})}"
        th:if="${customer.hasNext()}">Next</a>
 </div>
 </body>
