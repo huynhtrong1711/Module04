@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3 style="text-align: center">User</h3>
+<p>
+  <a th:href="@{/create}">
+    Add new User
+  </a>
+</p>
+<a th:text="${message}"></a>
+<table id = "user">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone Number</th>
+    <th>Age</th>
+    <th>Email</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="users : ${userDtoList}">
+    <td th:text="${users.getId()}"></td>
+    <td ><a th:href="@{/user/{id}/view(id=${users.getId()})}" th:text="${users.getFirstname()}"></a></td>
+    <td th:text="${users.getLastname()}"></td>
+    <td th:text="${users.getPhoneNumber()}"></td>
+    <td th:text="${users.getAge()}"></td>
+    <td th:text="${users.getEmail()}"></td>
+    <td><a th:href="@{/{id}/edit(id=${users.getId()})}">edit</a></td>
+    <td><a th:href="@{/{id}/delete(id=${users.getId()})}">delete</a></td>
+  </tr>
+  </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

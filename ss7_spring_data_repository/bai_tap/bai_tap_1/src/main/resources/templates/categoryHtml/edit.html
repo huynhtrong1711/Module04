@@ -7,7 +7,7 @@
 <body>
 <h1>Edit category</h1>
 <p>
-    <a href="/category/list">Trở về trang danh sách category</a>
+    <a href="/category/home">Trở về trang danh sách category</a>
 </p>
 <form th:action="@{/category/edit}" th:object="${categoryList}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
