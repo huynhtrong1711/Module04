@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>Add Book</h3>
+<p>
+    <a th:href="@{/book/list}">
+        Back to book list
+    </a>
+</p>
+<div id="form">
+    <form th:action="@{/book/save}" th:object="${book}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Tên sách</label>
+            <input type="text" th:field="*{nameBook}"/>
+        </div>
+        <div>
+            <label>Tên tác giả</label>
+            <input type="text" th:field="*{nameAuthor}"/>
+        </div>
+        <div>
+            <label>Ngày xuất bản</label><br>
+            <input type="date" th:field="*{datePublication}"/>
+        </div>
+        <div>
+            <label>Số lượng sách</label>
+            <input type="text" th:field="*{numberOfBooks}"/>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
