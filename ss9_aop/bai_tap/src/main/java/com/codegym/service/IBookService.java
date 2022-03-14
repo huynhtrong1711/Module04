@@ -9,5 +9,5 @@ import java.util.List;
 public interface IBookService {
     Page<Book> findAll(Pageable pageable);
     void save(Book book);
-    void remove(int id);
+    Book findById(int id);
 }

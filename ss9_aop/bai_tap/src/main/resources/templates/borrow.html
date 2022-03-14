@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<h1>Mượn sách</h1>
+<p >
+    <a th:href="@{/book/home}">
+    Trở về trang home
+    </a>
+</p>
+<span>Nhớ lưu lại mã số để trả sách nha: </span>
+<a th:text="${code}"></a>
+
+</body>
+</html>

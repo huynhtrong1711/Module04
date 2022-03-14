@@ -11,8 +11,9 @@ public class CodeBorrowed {
     private Integer id;
     private String codeBorrow;
 
-    @OneToMany(mappedBy = "codeBorrowed")
-    private Set<Book> book;
+    @ManyToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private Book book;
 
     public CodeBorrowed() {
     }
@@ -33,11 +34,11 @@ public class CodeBorrowed {
         this.codeBorrow = codeBorrow;
     }
 
-    public Set<Book> getBook() {
+    public Book getBook() {
         return book;
     }
 
-    public void setBook(Set<Book> book) {
+    public void setBook(Book book) {
         this.book = book;
     }
 }

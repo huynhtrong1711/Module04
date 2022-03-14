@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookServiceImpl implements IBookService{
 
@@ -25,7 +27,14 @@ public class BookServiceImpl implements IBookService{
     }
 
     @Override
-    public void remove(int id) {
-        repository.deleteById(id);
+    public Book findById(int id) {
+        Optional<Book> book = repository.findById(id);
+        if (book.isPresent()) {
+            return book.get();
+        }else {
+            return null;
+        }
+
     }
+
 }

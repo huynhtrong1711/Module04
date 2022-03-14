@@ -1,6 +1,7 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -13,9 +14,8 @@ public class Book {
     private String datePublication;
     private int numberOfBooks;
 
-    @ManyToOne
-    @JoinColumn(name = "id_borrow", referencedColumnName = "id")
-    private CodeBorrowed codeBorrowed;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private Set<CodeBorrowed> codeBorrowed;
 
     public Book() {
     }
@@ -60,11 +60,11 @@ public class Book {
         this.numberOfBooks = numberOfBooks;
     }
 
-    public CodeBorrowed getCodeBorrowed() {
+    public Set<CodeBorrowed> getCodeBorrowed() {
         return codeBorrowed;
     }
 
-    public void setCodeBorrowed(CodeBorrowed codeBorrowed) {
+    public void setCodeBorrowed(Set<CodeBorrowed> codeBorrowed) {
         this.codeBorrowed = codeBorrowed;
     }
 }
