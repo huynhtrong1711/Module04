@@ -64,7 +64,7 @@ public class BookController {
         int numberOfBook = book.getNumberOfBooks();
         book.setNumberOfBooks(numberOfBook - 1);
         bookService.save(book);
-        int code = (int) Math.floor(((Math.random()*89999) + 10000));
+        int code = (int) Math.floor((Math.random()*89999) + 10000);
         String codeRandom = String.valueOf(code);
         model.addAttribute("code", codeRandom);
         CodeBorrowed codeBorrowed = new CodeBorrowed();
@@ -76,18 +76,17 @@ public class BookController {
 
     @GetMapping("/{id}/return")
     public ModelAndView showReturn() {
-       return new ModelAndView("return", "codeBrrow", new CodeBorrowed());
+       return new ModelAndView("return", "codeBorrow", new CodeBorrowed());
     }
 
     @PostMapping("/return")
-    public String returnBook(@RequestParam String codeBorrow, Model model) {
+    public String returnBook(@RequestParam String codeBorrow, RedirectAttributes redirectAttributes) {
         CodeBorrowed codeBorrowed = codeBorrowedService.findByCode(codeBorrow);
         Book book = bookService.findById(codeBorrowed.getBook().getId());
         book.setNumberOfBooks(book.getNumberOfBooks() + 1);
         bookService.save(book);
         codeBorrowedService.remove(codeBorrowed.getId());
-        model.addAttribute("message", "thank you");
-        return "/home";
+        redirectAttributes.addFlashAttribute("message", "Trả sách thành công!");
+        return "redirect:/book/home";
     }
-
 }
