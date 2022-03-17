@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{deleteCustomer}"></title>
+</head>
+<body>
+<h1 th:text="#{deleteCustomer}"></h1>
+<p>
+    <a href="/customers/home" th:text="#{backCustomer}"></a>
+</p>
+
+<form th:action="@{/customers/delete}" th:object="${customer}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td th:text="#{firstName}"></td>
+            <td><span th:text="${customer.firstName}"></span></td>
+        </tr>
+        <tr>
+            <td th:text="#{LastName}"></td>
+            <td><span th:text="${customer.lastName}"></span></td>
+        </tr>
+        <tr>
+            <td th:text="#{province}"></td>
+            <td>
+                <span th:text="${customer.province.name}"></span>
+            </td>
+<!--                <select name="province">-->
+<!--                    <option th:each="procinces : ${provinceList}"-->
+<!--                            th:value="${procinces.id}"-->
+<!--                            th:text="${procinces.name}"-->
+<!--                            th:selected="(${customer.province}) and (${procinces.id} == *{province.id})"></option>-->
+<!--                </select>-->
+
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" th:value="#{deleteCustomer}"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
