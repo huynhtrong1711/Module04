@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/layout :: head">
+<head >
+    <th:block th:replace="/layout :: head">
+
+    </th:block>
 </head>
 <body>
 <h3 style="text-align: center">Blog</h3>
@@ -48,6 +51,5 @@
    th:if="${blogList.hasNext()}">Next</a>
 <footer th:replace="/layout :: footer"></footer>
 
-<a th:href="@{/blog/logout}">Đăng xuất</a>
 </body>
 </html>
