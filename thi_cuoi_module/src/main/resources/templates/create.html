@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head >
+    <th:block th:replace="/layout :: head">
+
+    </th:block>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<body>
+<h3 style="text-align: center">Thêm mới sản phẩm</h3>
+<h5 style="text-align: center">Các thuộc tính có dấu<a style="color: red">*</a> là bắt buộc</h5>
+<center>
+    <div id="form">
+        <form th:action="@{/product/save}" th:object="${productDto}"
+              method="POST" novalidate="novalidate">
+            <div>
+                <span>
+                    <label>Tên sản phẩm(<a style="color: red">*</a>): </label>
+                    <input type="text" th:field="*{nameProduct}" style="text-align: center"/>
+                    <p th:if="${#fields.hasErrors('nameProduct')}" th:errors="*{nameProduct}" style="color: red"></p>
+                </span>
+            </div>
+            <div>
+                <label>Giá bắt đầu(<a style="color: red">*</a>):</label>
+                <input type="text" th:field="*{price}" style="text-align: center"/>
+                <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color: red"></p>
+            </div>
+            <div>
+                <label>Loại sản phẩm(<a style="color: red">*</a>): </label>
+                <select th:field="*{productType.idProductType}">
+                    <option value="" style="text-align: center" selected>Chọn loại sản phẩm </option>
+                    <option th:each="item: ${productType}"
+                            th:value="${item.idProductType}" th:text="${item.nameProductType}" style="text-align: center"></option>
+
+                </select>
+                <p th:if="${#fields.hasErrors('productType.idProductType')}" th:errors="*{productType.idProductType}" style="color: red"></p>
+            </div>
+            <div>
+                <label>Tình trạng đấu giá(<a style="color: red">*</a>): </label>
+                <select th:field="*{status}">
+                    <option value="" style="text-align: center" selected>Chọn loại tình trạng đấu giá </option>
+                    <option value="Chờ duyệt" style="text-align: center" selected>Chờ duyệt </option>
+                    <option value="Đang đấu giá" style="text-align: center" selected>Đang đấu giá </option>
+                    <option value="Đã bán" style="text-align: center" selected>Đã bán </option>
+                </select>
+                <p th:if="${#fields.hasErrors('status')}" th:errors="*{status}" style="color: red"></p>
+            </div>
+            <div>
+                <button class="btn btn-success" type="submit" value="Save"> Lưu</button>
+                <a class="btn btn-success" th:href="@{/product}" style="text-decoration: none">Back to list</a>
+            </div>
+        </form>
+    </div>
+</center>
+</body>
+<footer th:replace="/layout :: footer"></footer>
+</html>

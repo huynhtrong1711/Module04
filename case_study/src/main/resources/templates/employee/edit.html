@@ -10,43 +10,45 @@
 
 <body>
 <h3 style="text-align: center">Edit Employee</h3>
-<p>
-    <a class="btn btn-success" th:href="@{/employee}">
-        Back to employee list
-    </a>
-</p>
 <center>
     <div id="form">
-        <form th:action="@{/employee/edit}" th:object="${employees}"
+        <form th:action="@{/employee/edit}" th:object="${employeeDto}"
               method="POST" novalidate="novalidate">
             <input type="hidden" th:field="*{id}"/>
             <div>
                 <label>Name Employee</label>
-                <input type="text" th:field="*{nameEmployee}"/>
+                <input type="text" th:field="*{nameEmployee}" style="text-align: center"/>
+                <p th:if="${#fields.hasErrors('nameEmployee')}" th:errors="*{nameEmployee}" style="color: red"></p>
             </div>
             <div>
                 <label>Employee Birthday</label>
-                <input type="date" th:field="*{dayOBEmployee}"/>
+                <input type="date" th:field="*{dayOBEmployee}" style="text-align: center"/>
+                <p th:if="${#fields.hasErrors('dayOBEmployee')}" th:errors="*{dayOBEmployee}" style="color: red"></p>
             </div>
             <div>
                 <label>Employee Id Cart</label>
-                <input type="text" th:field="*{idCardEmployee}"/>
+                <input type="text" th:field="*{idCardEmployee}" style="text-align: center"/>
+                <p th:if="${#fields.hasErrors('idCardEmployee')}" th:errors="*{idCardEmployee}" style="color: red"></p>
             </div>
             <div>
                 <label>Employee Salary</label>
-                <input type="text" th:field="*{salaryEmployee}"/>
+                <input type="text" th:field="*{salaryEmployee}" style="text-align: center"/>
+                <p th:if="${#fields.hasErrors('salaryEmployee')}" th:errors="*{salaryEmployee}" style="color: red"></p>
             </div>
             <div>
                 <label>Employee Phone</label>
-                <input type="text" th:field="*{phoneEmployee}"/>
+                <input type="text" th:field="*{phoneEmployee}" style="text-align: center"/>
+                <p th:if="${#fields.hasErrors('phoneEmployee')}" th:errors="*{phoneEmployee}" style="color: red"></p>
             </div>
             <div>
                 <label>Employee Email</label>
-                <input type="text" th:field="*{emailEmployee}" />
+                <input type="text" th:field="*{emailEmployee}" style="text-align: center"/>
+                <p th:if="${#fields.hasErrors('emailEmployee')}" th:errors="*{emailEmployee}" style="color: red"></p>
             </div>
             <div>
                 <label>Employee Address</label>
-                <input type="text" th:field="*{addressEmployee}"/>
+                <input type="text" th:field="*{addressEmployee}" style="text-align: center"/>
+                <p th:if="${#fields.hasErrors('addressEmployee')}" th:errors="*{addressEmployee}" style="color: red"></p>
             </div>
             <div>
                 <label>Position: </label><td>
@@ -69,7 +71,11 @@
                             th:value="${divisionss.idDivision}" th:text="${divisionss.nameDivision}" style="text-align: center"></option>
                 </select>
             </div>
-            <input type="submit" value="Update"/>
+            <div>
+                <input type="submit" value="Update"/>
+                <a id="back" th:href="@{/employee}" style="text-decoration: none">Back to list</a>
+            </div>
+
         </form>
     </div>
 </center>

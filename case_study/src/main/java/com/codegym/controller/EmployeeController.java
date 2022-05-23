@@ -1,11 +1,11 @@
 package com.codegym.controller;
 
 import com.codegym.dto.EmployeeDto;
-import com.codegym.model.Employee;
-import com.codegym.service.IDivisionService;
-import com.codegym.service.IEducationService;
-import com.codegym.service.IEmployeeService;
-import com.codegym.service.IPositionService;
+import com.codegym.model.employee.Employee;
+import com.codegym.service.employee.IDivisionService;
+import com.codegym.service.employee.IEducationService;
+import com.codegym.service.employee.IEmployeeService;
+import com.codegym.service.employee.IPositionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,18 +14,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.awt.*;
-import java.util.List;
-
 @Controller
-@RequestMapping("/employee")
+@RequestMapping({"/employee"})
 public class EmployeeController {
 
     @Autowired
@@ -87,20 +83,31 @@ public class EmployeeController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView showEdit(@PathVariable int id) {
-        Employee employee = employeeService.findById(id);
         ModelAndView modelAndView = new ModelAndView("/employee/edit");
-        modelAndView.addObject("employees", employee);
         modelAndView.addObject("position", iPositionService.findAll());
         modelAndView.addObject("division", divisionService.findAll());
         modelAndView.addObject("educationDegree", educationService.findAll());
+        Employee employee = employeeService.findById(id);
+        EmployeeDto employeeDto = new EmployeeDto();
+        BeanUtils.copyProperties(employee, employeeDto);
+        modelAndView.addObject("employeeDto",employeeDto);
         return modelAndView;
     }
 
     @PostMapping("/edit")
-    public String editEmployee(Employee employee, RedirectAttributes redirectAttributes) {
-        employeeService.save(employee);
-        redirectAttributes.addFlashAttribute("message", "Chỉnh sửa nhân viên thành công!");
-        return "redirect:/employee";
+    public String editEmployee(@Validated @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("position", iPositionService.findAll());
+            model.addAttribute("division", divisionService.findAll());
+            model.addAttribute("educationDegree", educationService.findAll());
+            return "employee/edit";
+        } else{
+            Employee employee = new Employee();
+            BeanUtils.copyProperties(employeeDto, employee);
+            employeeService.save(employee);
+            model.addAttribute("message", "Chỉnh sửa thông tin nhân viên" + employee.getNameEmployee() + " thành công!");
+            return "redirect:/employee";
+        }
     }
 
     @GetMapping("/search")

@@ -1,8 +1,8 @@
 package com.codegym.dto;
 
-import com.codegym.model.Division;
-import com.codegym.model.EducationDegree;
-import com.codegym.model.Position;
+import com.codegym.model.employee.Division;
+import com.codegym.model.employee.EducationDegree;
+import com.codegym.model.employee.Position;
 
 import javax.validation.constraints.*;
 
@@ -16,11 +16,11 @@ public class EmployeeDto {
     private String nameEmployee;
 
     @NotNull(message = "Bắt buộc phải nhập nha!")
-    @NotBlank(message = "Tên không được để trống nha!")
+    @NotBlank(message = "Không được để trống nha!")
     private String dayOBEmployee;
 
     @NotNull(message = "Bắt buộc phải nhập nha!")
-    @NotBlank(message = "Tên không được để trống nha!")
+    @NotBlank(message = "Không được để trống nha!")
     @Pattern(regexp = "[0-9]{9,12}")
     private String idCardEmployee;
 
@@ -29,17 +29,17 @@ public class EmployeeDto {
     private double salaryEmployee;
 
     @NotNull(message = "Bắt buộc phỉa nhập nha! ")
-    @NotBlank(message = "Tên không được để trống nha!")
+    @NotBlank(message = "Không được để trống nha!")
     @Pattern(regexp = "(0[3|7|8|5|9])+([0-9]{8,9})$", message = "số bắt đầu bằng 0, và phải 10 hoặc 11 số")
     private String phoneEmployee;
 
     @NotNull(message = "Bắt buộc phải nhập nha! ")
     @NotBlank(message = "Không được để rỗng nha!")
-    @Email(message = "mail phỉa đúng chuẩn mới đươc")
+    @Email(message = "Mail phải đúng chuẩn mới đươc")
     private String emailEmployee;
 
     @NotNull(message = "Bắt buộc phải nhập nha!")
-    @NotBlank(message = "Tên không được để trống nha!")
+    @NotBlank(message = "Không được để trống nha!")
     private String addressEmployee;
 
     private Position positions;

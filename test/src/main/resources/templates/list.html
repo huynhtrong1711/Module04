@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction</title>
+    <th:block th:replace="/layout :: head">
+
+    </th:block>
+</head>
+<body>
+<h3 style="text-align: center">Danh sách giao dịch</h3>
+<p style="text-align: center">
+    <a id="back" th:href="@{/transaction/create}" style="text-decoration: none">
+        Tạo mới giao dịch
+    </a>
+</p>
+<form th:action="@{/transaction/search}">
+    <span>Tìm kiếm: <input type="search" name="name" placeholder="Tên khách hàng"></span>
+    <button class="search">Tìm kiếm</button>
+</form>
+
+<p>
+    <a th:text="${message}"></a>
+</p>
+
+<table id = "transaction" >
+    <thead>
+    <tr>
+        <th >Mã dịch vụ</th>
+        <th >Tên khách hàng</th>
+        <th >Ngày giao dịch</th>
+        <th >Loại dịch vụ</th>
+        <th >Đơn giá(VND/m2)</th>
+        <th >Diên tích(m2)</th>
+        <th >Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction : ${transactionList}">
+        <td th:text="${transaction.codeTransaction}"></td>
+        <td th:text="${transaction.customer.nameCustomer}"></td>
+        <td th:text="${#dates.format(transaction.dateTransaction, 'dd-MM-YYYY')}"></td>
+        <td th:text="${transaction.typeOfService.nameService}"></td>
+        <td th:text="${transaction.unitPrice}"></td>
+        <td th:text="${transaction.acreage}"></td>
+        <td >
+            <button type="button" class="btn btn-success"><a
+                    th:href="@{/transaction/view/__${transaction.getIdTransaction()}__}" style="text-decoration: none">Thông tin</a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<center>
+    <div>
+        <a th:href="@{'/transaction'(page = ${transactionList.number - 1})}"
+           th:if="${transactionList.hasPrevious()}" class="btn btn-success">Trang sau</a>
+        <span th:text="${transactionList.number + 1}"></span>
+        / <span th:text="${transactionList.totalPages}"></span>
+        <a th:href="@{'/transaction'(page = ${transactionList.number + 1})}"
+           th:if="${transactionList.hasNext()}" class="btn btn-success">Trang trước</a>
+    </div>
+</center>
+<th:block>
+    <footer th:replace="/layout :: footer"></footer>
+</th:block>
+</body>
+</html>
